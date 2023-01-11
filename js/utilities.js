@@ -8,7 +8,7 @@ function rectangularCollision({rectangle1, rectangle2}) {
 }
 
 function determineWinner({player, enemy, timerId}) {
-    clearTimeout(timerId)
+    clearTimeout(timerId) // Stops the time
 
     document.querySelector('#displayText').style.display = 'flex'
 
@@ -19,6 +19,8 @@ function determineWinner({player, enemy, timerId}) {
     } else if (player.health < enemy.health) {
         document.querySelector("#displayText").innerHTML = "PLAYER 2 WINS"
     }
+
+    window.location.reload();
 }
 
 let timer = 100
