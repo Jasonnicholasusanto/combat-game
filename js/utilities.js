@@ -12,6 +12,8 @@ function determineWinner({player, enemy, timerId}) {
 
     document.querySelector('#displayText').style.display = 'flex'
 
+    document.querySelector("#resetButton").style.display = 'block'
+
     if (player.health == enemy.health){
         document.querySelector("#displayText").innerHTML = "TIE"
     } else if (player.health > enemy.health){
@@ -19,8 +21,7 @@ function determineWinner({player, enemy, timerId}) {
     } else if (player.health < enemy.health) {
         document.querySelector("#displayText").innerHTML = "PLAYER 2 WINS"
     }
-
-    window.location.reload();
+    // window.location.reload(true);
 }
 
 let timer = 100
