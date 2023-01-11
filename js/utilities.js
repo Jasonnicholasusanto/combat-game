@@ -25,6 +25,8 @@ function determineWinner({player, enemy, timerId}) {
 
 let timer = 100
 let timerId
+let timer_on = 0;
+
 function decreaseTimer() {
 
     if(timer>0){
@@ -67,7 +69,37 @@ function startTimer() {
         player.dead = false
         enemy.dead = false
         document.querySelector('#startTimer').style.display = 'none'
-        decreaseTimer()
+        startCount();
     }
      
+}
+
+function pauseGame(){
+    stopCount();
+
+    document.querySelector("#pause").style.display = 'none'
+    document.querySelector("#resume").style.display = 'block'
+
+    player.dead = true
+    enemy.dead = true
+
+}
+
+function resumeGame(){
+    document.querySelector("#resume").style.display = 'none'
+    document.querySelector("#pause").style.display = 'block'
+
+    startTimer();
+}
+
+function startCount() {
+    if (!timer_on) {
+      timer_on = 1;
+      decreaseTimer();
+    }
+  }
+  
+function stopCount() {
+    clearTimeout(timerId);
+    timer_on = 0;
 }

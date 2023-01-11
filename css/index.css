@@ -61,3 +61,11 @@
   left: 46%;
   top: 13%;
 }
+
+.resumeButton {
+  position: absolute;
+  align-items: center;
+  display: none;
+  left: 42%;
+  top: 50%;
+}
