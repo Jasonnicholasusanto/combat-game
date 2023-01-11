@@ -65,7 +65,7 @@ class Sprite {
 /* This function creates the character's sprites, extends the sprites class so we can utilize the animation functions */
 class Fighter extends Sprite {
     // We have {} for the argument so that we are only passing through one argument within this object. The order doesn't matter anymore as they are properties.
-    constructor({position, velocity, color, imageSrc, scale = 1, framesMax = 1, offset = {x: 0, y: 0}, sprites, attackBox = {offset: {}, width: undefined, height: undefined}}) {
+    constructor({position, velocity, attackPoint, color, imageSrc, scale = 1, framesMax = 1, offset = {x: 0, y: 0}, sprites, attackBox = {offset: {}, width: undefined, height: undefined}}) {
         
       super({
         position,
@@ -76,6 +76,7 @@ class Fighter extends Sprite {
       })
 
         this.velocity = velocity
+        this.attackPoint = attackPoint
         this.width = 50
         this.height = 150
         this.lastKey
@@ -156,8 +157,8 @@ class Fighter extends Sprite {
         // }, 1000) 
     }
 
-    takeHit() {
-      this.health -= 20
+    takeHit(damage) {
+      this.health -= damage
 
       if (this.health <= 0) {
         this.switchSprite('death')

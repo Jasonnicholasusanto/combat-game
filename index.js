@@ -46,6 +46,7 @@ const player = new Fighter( {
         x: 0,
         y: 0
     },
+    attackPoint: 15,
     color: 'red',
     offset: {
         x: 0,
@@ -110,6 +111,7 @@ const enemy = new Fighter( {
         x: 0,
         y: 0
     },
+    attackPoint: 8,
     offset: {
         x: -50,
         y: 0
@@ -247,7 +249,7 @@ function animate() {
     if (rectangularCollision({rectangle1: player, rectangle2: enemy})
         && player.isAttacking && player.framesCurrent === 4){
             
-            enemy.takeHit()
+            enemy.takeHit(player.attackPoint)
             player.isAttacking = false
             // document.querySelector('#enemyHealth').style.width = enemy.health + "%"
 
@@ -265,7 +267,7 @@ function animate() {
     if (rectangularCollision({rectangle1: enemy, rectangle2: player})
         && enemy.isAttacking && enemy.framesCurrent === 2){
             
-            player.takeHit()
+            player.takeHit(enemy.attackPoint)
             enemy.isAttacking = false
             // document.querySelector('#playerHealth').style.width =player.health + "%"
 
