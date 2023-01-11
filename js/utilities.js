@@ -21,7 +21,6 @@ function determineWinner({player, enemy, timerId}) {
     } else if (player.health < enemy.health) {
         document.querySelector("#displayText").innerHTML = "PLAYER 2 WINS"
     }
-    // window.location.reload(true);
 }
 
 let timer = 100
@@ -39,6 +38,36 @@ function decreaseTimer() {
 
     if(timer==0){
         determineWinner({player, enemy, timerId})
+    }
+     
+}
+
+let startTime = 5
+let startTimerId
+function startTimer() {
+    player.dead = true
+    enemy.dead = true
+
+    if(startTime>0){
+        // This line creates the loop
+        startTimerId = setTimeout(startTimer, 1000)
+
+        startTime -= 1
+        // This line of code changes the value/items in the HTML div into the provided value.
+        document.querySelector('#startTimer').innerHTML = startTime-1
+
+        if(startTime==1){
+            document.querySelector('#startTimer').innerHTML = "FIGHT!"
+            player.dead = false
+            enemy.dead = false
+        }
+    }
+
+    if(startTime==0){
+        player.dead = false
+        enemy.dead = false
+        document.querySelector('#startTimer').style.display = 'none'
+        decreaseTimer()
     }
      
 }

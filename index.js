@@ -187,7 +187,7 @@ const keys = {
 }
 
 /* Timer for the game */
-decreaseTimer();
+startTimer();
 
 /* Animation function - to animate the character movements*/
 function animate() {
