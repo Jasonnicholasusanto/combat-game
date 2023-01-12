@@ -247,9 +247,14 @@ function animate() {
 
     // To detect collision when player gets hit
     if (rectangularCollision({rectangle1: player, rectangle2: enemy})
-        && player.isAttacking && player.framesCurrent === 4){
+        && player.isAttacking 
+        && player.framesCurrent === 4){
             
-            enemy.takeHit(player.attackPoint)
+            if(enemy.isDefending){
+                enemy.takeHit(player.attackPoint / 3)
+            } else {
+                enemy.takeHit(player.attackPoint)
+            }
             player.isAttacking = false
             // document.querySelector('#enemyHealth').style.width = enemy.health + "%"
 
@@ -265,9 +270,14 @@ function animate() {
 
     // To detect collision when enemy gets hit
     if (rectangularCollision({rectangle1: enemy, rectangle2: player})
-        && enemy.isAttacking && enemy.framesCurrent === 2){
+        && enemy.isAttacking 
+        && enemy.framesCurrent === 2){
             
-            player.takeHit(enemy.attackPoint)
+            if(player.isDefending){
+                player.takeHit(enemy.attackPoint / 3)
+            } else {
+                player.takeHit(enemy.attackPoint)
+            }
             enemy.isAttacking = false
             // document.querySelector('#playerHealth').style.width =player.health + "%"
 
@@ -295,6 +305,7 @@ animate()
 
 // Event listener for key down action
 window.addEventListener('keydown', (event) => {
+    // console.log(event.key)
 
     if (!player.dead) {
         switch (event.key) {
@@ -314,6 +325,10 @@ window.addEventListener('keydown', (event) => {
 
             case 't':
                 player.attack()
+                break
+
+            case 'u':
+                player.defend()
                 break
         }
     }
@@ -337,6 +352,10 @@ window.addEventListener('keydown', (event) => {
         case 'Enter':
             enemy.attack()
             break
+
+        case "'":
+            enemy.defend()
+            break
         }
     }
 })
@@ -357,6 +376,10 @@ window.addEventListener('keyup', (event) => {
             player.pressedJump = false;
             break
 
+        case 'u':
+            player.stopDefend();
+            break
+
         case 'ArrowRight': 
             keys.ArrowRight.pressed = false
             break
@@ -366,8 +389,10 @@ window.addEventListener('keyup', (event) => {
             break
 
         case 'ArrowUp': 
-            // keys.ArrowUp.pressed = false
             enemy.pressedJump = false;
             break
+
+        case "'":
+            enemy.stopDefend();
     }
 })

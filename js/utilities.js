@@ -8,7 +8,9 @@ function rectangularCollision({rectangle1, rectangle2}) {
 }
 
 function determineWinner({player, enemy, timerId}) {
-    clearTimeout(timerId) // Stops the time
+    // clearTimeout(timerId) // Stops the time
+
+    stopCount();
 
     document.querySelector('#displayText').style.display = 'flex'
 
@@ -25,7 +27,7 @@ function determineWinner({player, enemy, timerId}) {
 
 let timer = 100
 let timerId
-let timer_on = 0;
+let timer_on = false;
 
 function decreaseTimer() {
 
@@ -59,7 +61,7 @@ function startTimer() {
         document.querySelector('#startTimer').innerHTML = startTime-1
 
         if(startTime==1){
-            document.querySelector('#startTimer').innerHTML = "FIGHT!"
+            document.querySelector('#startTimer').innerHTML = "SUDDEN COMBAT!"
             player.dead = false
             enemy.dead = false
         }
@@ -86,20 +88,23 @@ function pauseGame(){
 }
 
 function resumeGame(){
+    startCount();
+
+    player.dead = false
+    enemy.dead = false
+
     document.querySelector("#resume").style.display = 'none'
     document.querySelector("#pause").style.display = 'block'
-
-    startTimer();
 }
 
 function startCount() {
     if (!timer_on) {
-      timer_on = 1;
+      timer_on = true;
       decreaseTimer();
     }
   }
   
 function stopCount() {
     clearTimeout(timerId);
-    timer_on = 0;
+    timer_on = false;
 }

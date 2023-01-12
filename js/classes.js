@@ -92,6 +92,7 @@ class Fighter extends Sprite {
         }
         this.color = color
         this.isAttacking = false
+        this.isDefending = false
         this.health = 100
         this.dead = false
 
@@ -149,12 +150,15 @@ class Fighter extends Sprite {
 
     attack() {
       this.switchSprite('attack1')
-        this.isAttacking = true
-        
-        // After 100 milliseconds the isAttacking will be turned to false
-        // setTimeout(() => {
-        //     this.isAttacking = false
-        // }, 1000) 
+      this.isAttacking = true
+    }
+
+    defend() {
+      this.isDefending = true
+    }
+
+    stopDefend() {
+      this.isDefending = false
     }
 
     takeHit(damage) {
